@@ -46,7 +46,7 @@ export default function Home() {
             }
 
             // Send the FormData object to the backend
-            const response = await fetch('http://localhost:5000/analysis-report', {
+            const response = await fetch('https://data-analysis-toolbot.onrender.com/analysis-report', {
                 method: 'POST',
                 body: formData,
             });
