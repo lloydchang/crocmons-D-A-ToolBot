@@ -1,0 +1,7 @@
+google-generativeai
+python-dotenv
+pathlib
+PyPDF2
+flask
+numpy
+vertexai
