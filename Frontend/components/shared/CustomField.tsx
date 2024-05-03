@@ -1,42 +1,42 @@
-"use client"
+// "use client"
 
-import { z } from "zod";
-import { Control } from "react-hook-form";
+// import { z } from "zod";
+// import { Control } from "react-hook-form";
 
-import {
-    FormField,
-    FormItem,
-    FormControl,
-    FormMessage,
-    FormLabel
-} from "../ui/form"
+// import {
+//     FormField,
+//     FormItem,
+//     FormControl,
+//     FormMessage,
+//     FormLabel
+// } from "../ui/form"
 
-import { formSchema} from "../shared/TransformationForm"
+// import { formSchema} from "@/components/shared/"
 
-type CustomFieldProps = {
-    control:Control<z.infer<typeof formSchema>> | undefined;
-    render:(props:{field:any})=> React.ReactNode;
-    name:keyof z.infer<typeof formSchema>;
-    formLabel?:string;
-    className?: string;
-}
+// type CustomFieldProps = {
+//     control:Control<z.infer<typeof formSchema>> | undefined;
+//     render:(props:{field:any})=> React.ReactNode;
+//     name:keyof z.infer<typeof formSchema>;
+//     formLabel?:string;
+//     className?: string;
+// }
 
-export const CustomField = ({
-    control,
-    render, name, formLabel, className
-}: CustomFieldProps)=>{
-    return(
-      <FormField
-      control={control}
-      name={name}
-      render={({field})=>(
-        <FormItem className={className}>
-         {formLabel && <FormLabel>{formLabel}</FormLabel>}
-         <FormControl>{render({field})}</FormControl>
-         <FormMessage />
-        </FormItem>
-      )}
+// export const CustomField = ({
+//     control,
+//     render, name, formLabel, className
+// }: CustomFieldProps)=>{
+//     return(
+//       <FormField
+//       control={control}
+//       name={name}
+//       render={({field})=>(
+//         <FormItem className={className}>
+//          {formLabel && <FormLabel>{formLabel}</FormLabel>}
+//          <FormControl>{render({field})}</FormControl>
+//          <FormMessage />
+//         </FormItem>
+//       )}
 
-      />
-    )
-}
+//       />
+//     )
+// }

@@ -3,17 +3,18 @@
 import React, { useEffect, useState } from 'react';
 import PromptCard from '@/components/shared/PromptCard';
 import { getPrompts } from '@/lib/actions/prompt.action'; // Import the backend function
+import { IPrompt } from '@/lib/database/models/prompt.model';
 
 interface Post {
   _id: string;
   tag: string;
   prompt: string;
-  creator: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-    username: string; // Add the username property
-  };
+  creator:{
+    _id:string;
+    firstName:string;
+    lastName:string;
+    username:string;
+};
 }
 
 
@@ -28,7 +29,7 @@ const PromptCardList: React.FC<Props> = ({ data, handleTagClick }) => {
       {data.map((post) => (
         <PromptCard
           key={post._id}
-          prompt={post}
+          prompt={post.prompt}
           handleTagClick={handleTagClick}
           handleEdit={() => {}}
           handleDelete={() => {}}
