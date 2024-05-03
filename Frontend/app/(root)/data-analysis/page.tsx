@@ -23,7 +23,7 @@ export default function Home() {
         e.preventDefault();
         setIsFetching(true)
         try {
-            const res = await fetch('https://data-analysis-toolbot.onrender.com/data-analysis', {
+            const res = await fetch('http://localhost:5000/data-analysis', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
