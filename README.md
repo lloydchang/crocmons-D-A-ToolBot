@@ -12,7 +12,7 @@ Welcome to Data Analysis ToolBot, an innovative platform designed to revolutioni
 - [License](#license)
 
 ## Introduction
-Data Analysis ToolBot is a comprehensive data analysis tool built to streamline and simplify the data analysis process for professionals and enthusiasts. It provides a user-friendly interface with integrated AI capabilities to generate code snippets, demo outputs, and detailed explanations for various data analysis tasks.
+Data Analysis ToolBot is a comprehensive data analysis tool built to streamline and simplify the data analysis process for professionals and enthusiasts. It provides a modern user-friendly interface with integrated AI capabilities to generate code snippets, demo outputs, and detailed explanations for various data analysis tasks.
 
 ## Features
 - Five distinct tabs tailored to specific data analysis tasks: Data Analysis, Data Visualization, SQL Database, Analysis Report, and Data Insights.
@@ -35,12 +35,14 @@ Data Analysis ToolBot is a comprehensive data analysis tool built to streamline 
 3. Install dependencies: `npm install`
 4. Start the development server: `npm run dev`
 5. now open new terminal `cd backend`
-6. 
+6. Run - `pip install -r requirements.txt`
+7. add your api key to the .env file
+8. Run cmd - `python app.py`
 
 ## Usage
 1. Register/Login using Clerk authentication.
 2. Explore the different tabs for specific data analysis tasks.
-3. Input your queries and prompts to generate code snippets and demo outputs.
+3. Input your queries and prompts to generate code snippets, analysis reports and demo outputs with code explanation.
 4. Share prompts and collaborate with others using the Share Prompt tab.
 5. Provide feedback and contribute to the project's development.
 
