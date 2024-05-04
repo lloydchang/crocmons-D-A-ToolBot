@@ -2,7 +2,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>This page is currently working</div>
+    <div><p className='font-bold text-zinc-900 text-center mx-auto text-xl'>This page is currently working...Coming Soon</p></div>
   )
 }
 
