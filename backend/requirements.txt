@@ -3,5 +3,6 @@ python-dotenv
 pathlib
 PyPDF2
 flask
+flask_cors
 numpy
 vertexai
