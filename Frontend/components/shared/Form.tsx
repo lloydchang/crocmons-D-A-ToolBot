@@ -31,7 +31,7 @@ const Form: React.FC<FormProps> = ({
 
       <form
         onSubmit={handleSubmit}
-        className='mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism bg-slate-500 border border-gray-900 shadow-2xl bg-feature-bg bg-center bg-no-repeat'
+        className='mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism border border-gray-900 shadow-black shadow-2xl bg-feature-bg bg-center bg-no-repeat'
       >
         <label>
           <span className='font-satoshi font-semibold text-base text-gray-700 dark:text-gray-200'>
