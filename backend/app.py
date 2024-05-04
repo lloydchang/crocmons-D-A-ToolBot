@@ -377,8 +377,8 @@ def analysis_report():
         print(f'Error uploading file: {e}')
         return jsonify({'error': f'Failed to upload file: {str(e)}'}), 500
 
+# --------#####-------#
+# only for development purpose
 
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
