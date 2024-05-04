@@ -28,7 +28,7 @@ export default function Visualization() {
         e.preventDefault();
         setIsFetching(true)
         try {
-            const res = await fetch('http://localhost:5000/visualization', {
+            const res = await fetch('https://data-analysis-toolbot.onrender.com/visualization', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
