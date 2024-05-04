@@ -1,8 +1,10 @@
 "use client"
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import Form from '@/components/shared/Form';
-import { createPrompt } from '@/lib/actions/prompt.action'; // Import the backend function
+import { createPrompt } from '@/lib/actions/prompt.action'; 
+import { getUserById } from '@/lib/actions/user.actions';
+import { useAuth } from '@clerk/nextjs';
 
 const CreatePrompt: React.FC = () => {
   const router = useRouter();
@@ -12,20 +14,22 @@ const CreatePrompt: React.FC = () => {
     prompt: '',
     tag: ''
   });
+  const { userId } = useAuth();
 
   const handleCreatePrompt = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true);
 
     try {
-      const userId = 'userId'; // Provide the userId here, you might get it from authentication
-      const path = '/'; // Provide the path to revalidate cache
-      await createPrompt({ userId, prompt: post, path }); // Call the backend function directly
-      
+      if (!userId) {
+        redirect("/sign-in");
+      }
+      const user = await getUserById(userId)
+      const path = '/'; 
+      await createPrompt({ userId:user, prompt: post, path }); 
       router.push('/');
     } catch (error) {
       console.error('Error creating prompt:', error);
-      // Optionally, you can show an error message to the user
     } finally {
       setSubmitted(false);
     }
