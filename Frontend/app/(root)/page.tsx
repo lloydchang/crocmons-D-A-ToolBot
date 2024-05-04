@@ -168,7 +168,7 @@ export default function Home() {
        <span className="text-center text-blue-500"> AI Powered Prompts</span>
        </h1>
        <p className="desc text-center">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero necessitatibus sed, minus, rem iusto nam corporis optio fugiat veritatis recusandae esse. Distinctio ipsa mollitia quasi suscipit temporibus ullam, magni illo?
+        share your prompts with worldwide
        </p>
        {/* Feed */}
        <Feed />
