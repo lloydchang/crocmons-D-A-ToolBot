@@ -18,11 +18,11 @@ app = Flask(__name__)
 
 # Enable CORS for all routes
 CORS(app, resources={
-    r"/data-analysis": {"origins": "https://data-analysis-toolbot-qqghegubv-crocmons-projects.vercel.app"},
-    r"/sql-analysis": {"origins":"https://data-analysis-toolbot-qqghegubv-crocmons-projects.vercel.app"},
-    r"/visualization": {"origins":"https://data-analysis-toolbot-qqghegubv-crocmons-projects.vercel.app"},
-    r"/analysis-report": {"origins":"https://data-analysis-toolbot-qqghegubv-crocmons-projects.vercel.app"},
-    r"/data-insights": {"origins": "https://data-analysis-toolbot-qqghegubv-crocmons-projects.vercel.app"}
+    r"/data-analysis": {"origins": "https://data-analysis-toolbot.vercel.app"},
+    r"/sql-analysis": {"origins":"https://data-analysis-toolbot.vercel.app"},
+    r"/visualization": {"origins":"https://data-analysis-toolbot.vercel.app"},
+    r"/analysis-report": {"origins":"https://data-analysis-toolbot.vercel.app"},
+    r"/data-insights": {"origins": "https://data-analysis-toolbot.vercel.app"}
 })
 
  
