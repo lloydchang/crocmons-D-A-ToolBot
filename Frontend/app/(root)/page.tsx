@@ -86,11 +86,11 @@ export default function Home() {
         <div className='mb-12 px-6 lg:px-8'>
           <div className='mx-auto max-w-2xl sm:text-center'>
             <h2 className='mt-2 font-bold text-4xl text-gray-900 sm:text-5xl'>
-              Start chatting in minutes
+              Start Solving your Queries in minutes
             </h2>
             <p className='mt-4 text-lg text-gray-600'>
-              Chatting to your PDF files has never been
-              easier than with Quill.
+              Try out Data Analysis ToolBot today -
+                it really takes less than a minute.
             </p>
           </div>
         </div>
@@ -138,10 +138,7 @@ export default function Home() {
               Get your solution
               </span>
               <span className='mt-2 text-zinc-700'>
-              ToolBot will process your input query or an image and make it ready for your desired solution then copy the code & enjoy😊 <br />
-
-                It&apos;s that simple. Try out Data Analyst ToolBot today -
-                it really takes less than a minute.
+              ToolBot will process your input query or an image and make it ready for your desired solution then copy the code & enjoy😊
               </span>
             </div>
           </li>
