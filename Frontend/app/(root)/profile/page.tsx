@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { useSession, useAuth } from '@clerk/nextjs';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import Profile from '@/components/shared/Profile';
 import { getPromptById, deletePrompt, getPrompts } from '@/lib/actions/prompt.action';
 import { getUserById } from '@/lib/actions/user.actions';
@@ -18,6 +18,7 @@ const MyProfile: React.FC = async () => {
   const [posts, setPosts] = useState<IPrompt[]>([]);
   const { session } = useSession();
   const { userId } = useAuth();
+  const router = useRouter()
   
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +40,7 @@ const MyProfile: React.FC = async () => {
   }, [userId]);
 
   const handleEdit = (prompt: IPrompt) => {
-    redirect(`/update-prompt?id=${prompt?.creator?._id}`);
+    router.push(`/update-prompt?id=${prompt?.creator?._id}`);
   };
 
   const handleDelete = async (prompt: IPrompt) => {
@@ -47,7 +48,7 @@ const MyProfile: React.FC = async () => {
   
     if (hasConfirmed) {
       try {
-        await deletePrompt(prompt?.creator?._id); // Use prompt.creator._id
+        await deletePrompt(prompt.creator?._id); // Use prompt.creator._id
         const filteredPrompt = posts.filter(p => p?.creator?._id !== prompt?.creator?._id); // Adjusted filter condition
         setPosts(filteredPrompt);
       } catch (error) {

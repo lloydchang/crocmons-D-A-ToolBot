@@ -18,11 +18,11 @@ app = Flask(__name__)
 
 # Enable CORS for all routes
 CORS(app, resources={
-    r"/data-analysis": {"origins": "http://localhost:3000/"},
-    r"/sql-analysis": {"origins":"http://localhost:3000/"},
-    r"/visualization": {"origins":"http://localhost:3000/"},
-    r"/analysis-report": {"origins":"http://localhost:3000/"},
-    r"/data-insights": {"origins": "http://localhost:3000/"}
+    r"/data-analysis": {"origins": "http://localhost:3000"},
+    r"/sql-analysis": {"origins":"http://localhost:3000"},
+    r"/visualization": {"origins":"http://localhost:3000"},
+    r"/analysis-report": {"origins":"http://localhost:3000"},
+    r"/data-insights": {"origins": "http://localhost:3000"}
 })
 
  

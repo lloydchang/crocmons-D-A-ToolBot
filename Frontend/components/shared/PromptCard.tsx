@@ -30,8 +30,8 @@ const PromptCard: React.FC<Props> = ({ prompt, handleTagClick, handleEdit, handl
   };
 
   const handleProfileClicked = () => {
+    console.log(prompt)
     if (prompt.creator?._id === session?.user?.publicMetadata[0]) {
-      console.log(prompt)
       router.push('/profile');
     } else {
       router.push(`/profile/${session?.user?.publicMetadata[0]}?name=${session?.user?.fullName}`);
@@ -56,7 +56,7 @@ const PromptCard: React.FC<Props> = ({ prompt, handleTagClick, handleEdit, handl
         </div>
         <div className='copy_btn' onClick={handleCopy}>
           <Image
-            src={copied === prompt?.prompt ? '/assets/icons/tick.svg' : '/assets/icons/copy.svg'}
+            src={copied === prompt.prompt ? '/assets/icons/tick.svg' : '/assets/icons/copy.svg'}
             alt='copy'
             className='dark:w-13 dark:h-13 dark:font-semibold shadow-lg'
             width={16}
@@ -64,12 +64,13 @@ const PromptCard: React.FC<Props> = ({ prompt, handleTagClick, handleEdit, handl
           />
         </div>
       </div>
-      <p className='mt-4 mb-2 font-satoshi text-md text-gray-700 dark:text-white'>{prompt?.prompt}</p>
+      <p className='mt-4 mb-2 font-satoshi text-md text-gray-700 dark:text-white'>{prompt.prompt}
+      </p>
       <p
         className='font-inter my-2 text-sm orange_gradient cursor-pointer'
         onClick={() => handleTagClick && handleTagClick("")}
       >
-        {prompt?.tag}
+        {prompt.tag}
       </p>
       {session?.user?.publicMetadata[0] === prompt.creator?._id && path === '/profile' && (
         <div className='mt-5 flex-center gap-5 justify-evenly border-t border-gray-100 pt-3'>

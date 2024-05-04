@@ -8,7 +8,7 @@ import { IPrompt } from '@/lib/database/models/prompt.model';
 interface Post {
   _id: string;
   tag: string;
-  prompt: string;
+  prompt: IPrompt;
   creator:{
     _id:string;
     firstName:string;
@@ -24,6 +24,7 @@ interface Props {
 }
 
 const PromptCardList: React.FC<Props> = ({ data, handleTagClick }) => {
+  console.log(data)
   return (
     <div className='mt-16 prompt_layout'>
       {data.map((post) => (
@@ -45,13 +46,14 @@ const Feed: React.FC = () => {
   const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
 
+  // console.log(posts[0]?.prompt)
   const filteredPrompts = (searchtext: string): Post[] => {
     const regex = new RegExp(searchtext, 'i');
     return posts.filter(
       (postItem) =>
-        regex.test(postItem.creator.username) ||
-        regex.test(postItem.tag) ||
-        regex.test(postItem.prompt)
+        regex.test(postItem.prompt?.creator?.username) ||
+        regex.test(postItem.prompt?.tag) ||
+        regex.test(postItem.prompt?.prompt)
     );
   };
 
