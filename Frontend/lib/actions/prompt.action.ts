@@ -11,7 +11,7 @@ import { redirect } from "next/navigation";
 const populateUser = (query: any) => query.populate({
   path: 'creator',
   model: User,
-  select: '_id firstName lastName clerkId'
+  select: '_id email photo username clerkId'
 })
 
 

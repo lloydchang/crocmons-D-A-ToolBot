@@ -5,15 +5,19 @@ import PromptCard from '@/components/shared/PromptCard';
 import { getPrompts } from '@/lib/actions/prompt.action'; // Import the backend function
 import { IPrompt } from '@/lib/database/models/prompt.model';
 
-interface Post {
+interface Prompt {
   _id: string;
+  prompt: string;
   tag: string;
-  prompt: IPrompt;
+}
+interface Post {
+  prompt: Prompt;
   creator:{
     _id:string;
-    firstName:string;
-    lastName:string;
     username:string;
+    email:string;
+    photo:string;
+    clerkId:string;
 };
 }
 
@@ -29,7 +33,7 @@ const PromptCardList: React.FC<Props> = ({ data, handleTagClick }) => {
     <div className='mt-16 prompt_layout'>
       {data.map((post) => (
         <PromptCard
-          key={post._id}
+          key={post.prompt._id}
           prompt={post.prompt}
           handleTagClick={handleTagClick}
           handleEdit={() => {}}
@@ -51,7 +55,7 @@ const Feed: React.FC = () => {
     const regex = new RegExp(searchtext, 'i');
     return posts.filter(
       (postItem) =>
-        regex.test(postItem.prompt?.creator?.username) ||
+        regex.test(postItem.creator.username) ||
         regex.test(postItem.prompt?.tag) ||
         regex.test(postItem.prompt?.prompt)
     );

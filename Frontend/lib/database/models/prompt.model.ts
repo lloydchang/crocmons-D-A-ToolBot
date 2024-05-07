@@ -6,9 +6,10 @@ export interface IPrompt extends Document {
    tag:string;
    creator:{
        _id:string;
-       firstName:string;
-       lastName:string;
        username:string;
+       email:string;
+       photo:string;
+       clerkId:string;
    };
    createdAt?:Date;
    updatedAt?:Date;

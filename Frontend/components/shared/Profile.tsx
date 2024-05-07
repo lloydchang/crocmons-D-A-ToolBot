@@ -11,9 +11,9 @@ interface Prompt {
 interface ProfileProps {
   name: string;
   desc: string;
-  data: IPrompt[];
-  handleEdit: (prompt: IPrompt) => void;
-  handleDelete: (prompt: IPrompt) => void;
+  data: Prompt[];
+  handleEdit: (prompt: Prompt) => void;
+  handleDelete: (prompt: Prompt) => void;
 }
 
 const Profile: React.FC<ProfileProps> = ({ name, desc, data, handleEdit, handleDelete }) => {
@@ -27,7 +27,7 @@ const Profile: React.FC<ProfileProps> = ({ name, desc, data, handleEdit, handleD
       <div className='mt-10 prompt_layout'>
         {data.map(prompt => (
           <PromptCard
-            key={prompt.creator?._id}
+            key={prompt._id}
             prompt={prompt}
             handleEdit={() => handleEdit && handleEdit(prompt)}
             handleDelete={() => handleDelete && handleDelete(prompt)}

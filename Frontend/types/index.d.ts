@@ -2,6 +2,7 @@
 
 // ====== USER PARAMS
 declare type CreateUserParams = {
+    _id:string;
     clerkId: string;
     email: string;
     username: string;
@@ -21,8 +22,8 @@ declare type CreateUserParams = {
   declare type CreatePrompt = {
     prompt:{
       _id: string;    
-      prompt: string | undefined;
-      tag: string | undefined;
+      prompt: string;
+      tag: string;
     };
     userId: string;
     path: string;
