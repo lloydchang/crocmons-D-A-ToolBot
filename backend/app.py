@@ -131,7 +131,7 @@ def data_analysis_code():
     res = get_response_gemini(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
-    if res and ("pandas" in text_input.lower() or "pandas" in text_input.capitalize() or "numpy" in text_input.lower() or "numpy" in text_input.capitalize() or 'data analysis' in text_input or 'project' in text_input):
+    if res and ("Pandas" in text_input.lower() or "pandas" in text_input or "Numpy" in text_input.lower() or "numpy" in text_input or 'data analysis' in text_input or 'project' in text_input):
         expected_output = f"""
             what would be the expected response of this Code snippet:
             
@@ -179,7 +179,7 @@ Generate a Machine Learning code snippet or a Statistical Analysis for the follo
     res = get_response_gemini(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
-    if res and ("Machine Learning" in text_input.lower() or "Statistical Analysis" in text_input.lower() or "ML" in text_input.lower() or 'data analysis' in text_input or 'project' in text_input or 'data insights' in text_input):
+    if res and ("Machine Learning" in text_input.lower() or "Statistical Analysis" in text_input.lower() or "ML" in text_input.lower() or 'data analysis' in text_input or 'project' in text_input or 'data insights' in text_input or 'statistical analysis' in text_input or 'ml model' in text_input):
         expected_output = f"""
         what would be the expected response of this Code snippet:
             
@@ -237,7 +237,7 @@ Generate a SQL query snippet for the following text below:
     res = get_response_gemini(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
-    if res and ("sql" in text_input.lower() or "sql query" in text_input.capitalize() or 'data analysis' in text_input or 'sql project' in text_input or 'database project' in text_input or 'db' in text_input or 'SQL Database' in text_input.lower()):
+    if res and ("SQL" in text_input.lower() or "sql query" in text_input or 'data analysis' in text_input or 'sql project' in text_input or 'database project' in text_input or 'db' in text_input or 'SQL Database' in text_input.lower()):
         expected_output = f"""
         what would be the expected response of the sql query snippet:
                 
