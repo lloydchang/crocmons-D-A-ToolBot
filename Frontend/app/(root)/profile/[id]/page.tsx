@@ -42,7 +42,7 @@ const UserProfile: React.FC = () => {
   return (
     <Profile
       name={session?.user?.fullName || ""}
-      desc={`Welcome to ${session?.publicUserData.firstName}'s profile page`}
+      desc={`Welcome to ${session?.user?.fullName}'s shared prompts page`}
       data={userPosts}
       handleDelete={()=>{}}
       handleEdit={()=>{}}

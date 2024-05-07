@@ -60,7 +60,7 @@ const MyProfile: React.FC = async () => {
 
   return (
     <Profile
-      name='My'
+      name='All'
       desc='Shared Prompt'
       data={posts}
       handleEdit={handleEdit}
