@@ -66,13 +66,20 @@ export default function Home() {
         }
     };
 
+    const handleKeyDown = (e : any)=>{
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSubmit(e);
+        }
+    }
+
     return (
         <div className='mx-auto bg-feature-bg bg-center bg-no-repeat'>
         <h1 className='font-bold text-center text-5xl my-6 text-black mx-auto'>Build your Data Visualization Report</h1>
             <h4 className='py-3 text-center text-xl font-medium'>Here you can build your complete Data Analysis Report for your project</h4>
             <p className='py-2 text-center text-xl font-medium'>Upload your Data Visualization Graph Image here</p>
             {/* Form and input fields */}
-            <form onSubmit={handleSubmit} className='flex flex-col justify-center gap-5 mx-auto my-5'>
+            <form onSubmit={handleSubmit} className='flex flex-col justify-center gap-5 mx-auto my-5' onKeyDown={handleKeyDown}>
                 {/* Input for text query */}
                 <Input
                     value={query}

@@ -13,6 +13,8 @@ interface FormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
+
+
 const Form: React.FC<FormProps> = ({
   type,
   post,
@@ -20,6 +22,14 @@ const Form: React.FC<FormProps> = ({
   submitted,
   handleSubmit,
 }) => {
+
+  const handleKeyDown = (e : any)=>{
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        handleSubmit(e);
+    }
+  }
+
   return (
     <section className='w-full max-w-full flex-start flex-col bg-feature-bg bg-right-bottom bg-no-repeat'>
       <h1 className='head_text text-left'>
@@ -32,6 +42,7 @@ const Form: React.FC<FormProps> = ({
       <form
         onSubmit={handleSubmit}
         className='mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism border border-gray-900 shadow-black shadow-2xl bg-feature-bg bg-center bg-no-repeat'
+        onKeyDown={handleKeyDown}
       >
         <label>
           <span className='font-satoshi font-semibold text-base text-gray-700 dark:text-gray-200'>
