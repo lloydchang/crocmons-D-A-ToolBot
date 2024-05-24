@@ -54,13 +54,20 @@ export default function Home() {
         }
     };
 
+    const handleKeyDown = (e : any)=>{
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSubmit(e);
+        }
+      }
+
   
     return (
         <div className='mx-auto w-full h-full bg-feature-bg bg-center bg-no-repeat'>
             <h1 className='font-bold text-center text-5xl my-6 text-black mx-auto'>Welcome To Data Analysis ToolBot</h1>
             <h4 className='py-3 text-center text-xl font-medium'>Here you can find your complete solution by using different Data Analysis Tabs for your project</h4>
             <p className='py-2 text-center text-xl font-medium'>In this data analysis tab, you can generate any Pandas or Numpy Code snippet based on your prompts for your Data Analysis projects</p>
-            <form onSubmit={handleSubmit} className='flex flex-col justify-center gap-5 mx-auto my-5'>
+            <form onSubmit={handleSubmit} className='flex flex-col justify-center gap-5 mx-auto my-5' onKeyDown={handleKeyDown}>
              
 
                 <textarea value={query} onChange={(e) => setQuery(e.target.value)} className="py-3 px-2 rounded-lg hover:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] transition-all border border-slate-500" placeholder='Enter your Query here'         
