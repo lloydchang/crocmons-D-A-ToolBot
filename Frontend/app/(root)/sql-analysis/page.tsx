@@ -59,12 +59,19 @@ export default function Visualization() {
         }
     };
 
+    const handleKeyDown = (e : any)=>{
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSubmit(e);
+        }
+      }
+
     return (
         <div className='mx-auto bg-feature-bg bg-center bg-no-repeat'>
             <h1 className='font-bold text-center text-5xl my-6 text-black mx-auto'>SQL Query Generator</h1>
             <h4 className='py-3 text-center text-xl font-medium'>SQL Queries with Explanation</h4>
             <p className='py-2 text-center text-xl font-medium'>This tool is a simple tool that allows you to generate Any SQL Queries based on your prompts for your Data Analysis Project</p>
-            <form onSubmit={handleSubmit} className='flex flex-col justify-center gap-5 mx-auto my-5'>
+            <form onSubmit={handleSubmit} className='flex flex-col justify-center gap-5 mx-auto my-5' onKeyDown={handleKeyDown}>
                 <textarea value={query} onChange={(e) => setQuery(e.target.value)} className="py-3 px-2 rounded-lg hover:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] transition-all border border-slate-500" placeholder='Enter your Query here'/>
                 <button className='bg-green-600 text-white text-lg font-semibold rounded-md hover:bg-red-500 py-2 px-4 w-fit items-center mx-auto'>Generate SQL Query</button>
             </form>
