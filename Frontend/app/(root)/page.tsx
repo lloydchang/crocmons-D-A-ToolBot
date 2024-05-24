@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import Image from 'next/image'
-import Feed from '@/components/shared/Feed'
+// import Feed from '@/components/shared/Feed'
 
 export default function Home() {
   return (
@@ -168,7 +168,7 @@ export default function Home() {
         share your prompts with worldwide
        </p>
        {/* Feed */}
-       <Feed />
+       {/* <Feed /> */}
     </div>
       </div>
     </>

@@ -73,20 +73,20 @@ export async function deleteUser(clerkId: string) {
   }
 }
 
-// UPdate Prompts
-export async function updatePrompts(userId: string, prompts: string) {
+// USE CREDITS
+export async function updateCredits(userId: string, creditFee: number) {
   try {
     await connectToDatabase();
 
-    const updatedUserPrompts = await User.findOneAndUpdate(
+    const updatedUserCredits = await User.findOneAndUpdate(
       { _id: userId },
-      { $inc: { prompts: prompts }},
+      { $inc: { creditBalance: creditFee }},
       { new: true }
     )
 
-    if(!updatedUserPrompts) throw new Error("User Prompts update failed");
+    if(!updatedUserCredits) throw new Error("User credits update failed");
 
-    return JSON.parse(JSON.stringify(updatedUserPrompts));
+    return JSON.parse(JSON.stringify(updatedUserCredits));
   } catch (error) {
     handleError(error);
   }

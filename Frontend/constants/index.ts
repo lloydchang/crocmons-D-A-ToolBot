@@ -32,11 +32,11 @@ export const navLinks = [
       route: "/data-insights",
       icon: "/assets/icons/camera.svg",
     },
-    {
-      label: "Share Prompt",
-      route: "/create-prompt",
-      icon: "/assets/icons/camera.svg",
-    },
+    // {
+    //   label: "Share Prompt",
+    //   route: "/create-prompt",
+    //   icon: "/assets/icons/camera.svg",
+    // },
     
   ];
   
