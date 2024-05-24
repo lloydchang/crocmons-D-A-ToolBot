@@ -158,8 +158,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        <div className="mt-8 sm:mt-16 mx-auto max-w-6xl px-6 lg:px-8 flex-center flex-col bg-feature-bg bg-center bg-no-repeat  transition-all ">
+         
+        {/* <div className="mt-8 sm:mt-16 mx-auto max-w-6xl px-6 lg:px-8 flex-center flex-col bg-feature-bg bg-center bg-no-repeat  transition-all ">
        <h1 className="head_text text-gray-400 text-center">Share & Find
        <br className="max-md:hidden" /> 
        <span className="text-center text-blue-500"> AI Powered Prompts</span>
@@ -167,10 +167,12 @@ export default function Home() {
        <p className="desc text-center">
         share your prompts with worldwide
        </p>
-       {/* Feed */}
-       {/* <Feed /> */}
-    </div>
+       <Feed />
+    </div> */}
+        
       </div>
     </>
   )
 }
+
+
