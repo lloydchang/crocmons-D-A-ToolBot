@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-from dotenv import load_dotenv
 import google.generativeai as genai
 import numpy as np
 import base64
@@ -11,10 +10,17 @@ import tempfile
 import io
 from werkzeug.utils import secure_filename
 from pathlib import Path
-
+from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+
+# Environment Variable for base_url
+# url = os.getenv("NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL")
+# if url:
+#     base_url = url
+# else:
+#     base_url = "http://localhost:3000"
 
 # Enable CORS for all routes
 CORS(app, resources={
@@ -29,9 +35,7 @@ CORS(app, resources={
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 
-model = genai.GenerativeModel("gemini-pro")
-
-vision_model = genai.GenerativeModel("gemini-pro-vision")
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 
 # only text response
@@ -42,7 +46,7 @@ def get_response_gemini(input):
 
 # Both vision and text response 
 def generate_vision_response(input, img, prompt):
-    response = vision_model.generate_content([input, img[0], prompt],               
+    response = model.generate_content([input, img[0], prompt],               
          )
     return response.text
 

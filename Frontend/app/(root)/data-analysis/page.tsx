@@ -19,11 +19,14 @@ export default function Home() {
     }, 3000);
   };
 
+//   const baseURL = process.env.NEXT_PUBLIC_SERVER_URL ? `${process.env.NEXT_PUBLIC_SERVER_URL}` : 'http://localhost:5000';
+
+
     const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsFetching(true)
         try {
-            const res = await fetch('https://data-analysis-toolbot.onrender.com/data-analysis', {
+            const res = await fetch(`https://data-analysis-toolbot.onrender.com/data-analysis`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
