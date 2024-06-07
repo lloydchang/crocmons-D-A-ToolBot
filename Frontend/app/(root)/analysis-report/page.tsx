@@ -73,6 +73,7 @@ export default function Home() {
         }
     }
 
+
     return (
         <div className='mx-auto bg-feature-bg bg-center bg-no-repeat'>
         <h1 className='font-bold text-center text-5xl my-6 text-black mx-auto'>Build your Data Visualization Report</h1>

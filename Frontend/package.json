@@ -9,15 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^0.0.17",
     "@clerk/nextjs": "^4.29.7",
     "@edgestore/react": "^0.1.6",
     "@edgestore/server": "^0.1.6",
     "@hookform/resolvers": "^3.3.4",
+    "@nanostores/react": "github:ai/react",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-progress": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@uploadthing/react": "^6.5.0",
+    "ai": "^3.1.19",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "lucide-react": "^0.331.0",

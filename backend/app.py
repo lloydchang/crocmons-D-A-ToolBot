@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
+import re
 import google.generativeai as genai
 import numpy as np
 import base64
@@ -114,9 +115,6 @@ def image_setup(uploaded_file):
 
 # -----------------#-----------------#
 
-
-
-
 # All APi Routes
 
 @app.route("/data-analysis", methods=["POST"])
@@ -135,7 +133,7 @@ def data_analysis_code():
     res = get_response_gemini(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
-    if res and ("Pandas" in text_input.lower() or "pandas" in text_input or "Numpy" in text_input.lower() or "numpy" in text_input or 'data analysis' in text_input or 'project' in text_input):
+    if res:
         expected_output = f"""
             what would be the expected response of this Code snippet:
             
@@ -165,6 +163,60 @@ def data_analysis_code():
         })
     else:
         return jsonify({"error": "I am specifically designed for the Data Analysis topic. Please feel free to ask me any questions related to Pandas or Numpy in this input field."})
+
+
+# @app.route("/data-analysis", methods=["POST"])
+# def data_analysis_code():
+#     data = request.json
+#     text_input = data.get("text_input", "")
+
+#     # Basic check if the prompt is likely a code request
+#     if "pandas" in text_input.lower() or "numpy" in text_input.lower() or "data analysis" in text_input.lower() or "data manipulation" in text_input.lower() or "data cleaning" in text_input.lower() or "data" in text_input.lower():
+#         formatted_prompt = f"""
+#             Generate any data manipulation, data cleaning, and data analysis code snippet using Pandas, NumPy only  for the following text below as user prompts in the text_input field:
+
+#             ```
+#             {text_input}
+#             ```
+
+#             You will only provide any data manipulation, data cleaning, and data analysis code snippet using Pandas, NumPy based on the text_input provided. Do not give any wrong answer if it's not a pandas or numpy or data manipulation, data cleaning, and data analysis code.
+#         """
+#         res = get_response_gemini(formatted_prompt)
+#         res = res.strip().lstrip("```python").rstrip("```")
+
+#         if res:
+#             expected_output = f"""
+#             what would be the expected response of this Code snippet:
+            
+#             ```
+#             {res}
+#             ```
+#             Provide sample Response with no explanation
+#         """
+#             formatted_expected_output = expected_output.format(res=res)
+#             expected_output = get_response_gemini(formatted_expected_output)
+
+#             explanation = f"""
+#             Explain this Code snippet:
+            
+#             ```
+#             {res}
+#             ```
+#             Provide with simplest and easy words of explanation step by step with bullet points don't give paragraph format
+#         """
+#             formatted_explanation = explanation.format(res=res)
+#             explanation = get_response_gemini(formatted_explanation)
+            
+#             return jsonify({
+#                 "code_snippet": res,
+#                 "expected_output": expected_output,
+#                 "explanation": explanation
+#             })
+#         else:
+#             return jsonify({"error": "I am specifically designed for the Data Analysis topic. Please feel free to ask me any questions related to data manipulation, data cleaning, and data analysis using Pandas, NumPy only in this input field."})
+#     else:
+#         return jsonify({"message": "I am designed for Data Manipulation, Data Cleaning, and Data analysis using Pandas, NumPy in this tab. Please ask me a question related to those libraries."})
+
 
 
 @app.route('/data-insights', methods=["POST"])
@@ -384,5 +436,5 @@ def analysis_report():
 # --------#####-------#
 # only for development purpose
 
-# if __name__ == "__main__":
-#     app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
