@@ -113,7 +113,7 @@ export default function Home() {
                         {error}
                     </p>
                 ) : result && (
-                    <div className='mx-auto px-2 py-2 flex flex-col justify-center gap-5 glassmorphism'>
+                    <div className='glassmorphism mb-4 sm:px-4'>
                         <h3 className='font-semibold text-2xl text-blue-600'>Data Analysis Report:</h3>
                         {/* Display result */}
                         <span className='copy_btn' onClick={handleCopy}>
@@ -125,7 +125,9 @@ export default function Home() {
             height={16}
           />
         </span>
-                        <pre className='sm:text-xl'>{result}</pre>
+                        <p className='sm:text-xl my-6 gap-6'>
+                            {result}
+                            </p>
                     </div>
                 )}
             </div>

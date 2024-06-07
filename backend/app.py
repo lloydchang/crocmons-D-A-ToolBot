@@ -399,11 +399,11 @@ def analysis_report():
         text_input = request.form.get("text_input", "")
         uploaded_file = request.files.get('uploaded_file')
         prompt = """
-            You're an expert data analyst. You're going to make a data analysis Report for the following image and explain every graph from that given image. By following the below format -
+            You're an expert data analyst. You're going to make a data analysis Report for the following image and explain every line from that given image. By following the below format -
             
             Title of the image
 
-            Data Analysis Report in Details
+            Data Analysis Report in Bullet points 
 
         """
 
