@@ -70,50 +70,6 @@ def image_setup(uploaded_file):
     return img_parts
 
 
-### working future functions but not implemented yet ---
-# -----------------#--------#-----------------
-
-# def upload_img_to_gcs(uploaded_file):
-#     bucket = client.bucket(BUCKET_NAME)
-#     blob = bucket.blob(uploaded_file.filename)
-#     blob.upload_from_string(
-#         uploaded_file.read(),
-#         content_type = uploaded_file.content_type
-#         ) 
-#     return f"gs://{BUCKET_NAME}/{uploaded_file.filename}"
-
-
-# def is_data_analysis_image(image):
-#     img_array = np.array(image)
-#     """
-#     Analyzes an image to determine if it likely contains data visualization elements.
-
-#     Args:
-#         image: The image to be analyzed (preferably in RGB format).
-
-#     Returns:
-#         True if the image likely contains data visualization, False otherwise.
-#     """
-
-#     # Convert image to grayscale for simpler analysis
-#     gray = cv2.cvtColor(img_array, cv2.COLOR_BGR2GRAY)
-
-#     # Check for presence of lines and charts using adaptive thresholding
-#     thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)  # Adjust parameters if needed
-#     num_lines = cv2.countNonZero(thresh)
-
-#     # Check for color gradients (often used in heatmaps)
-#     hsv = cv2.cvtColor(img_array, cv2.COLOR_BGR2HSV)
-#     saturation = hsv[:, :, 1]
-#     num_bright_pixels = cv2.countNonZero(saturation > 128)  # Adjust threshold
-
-#     # Combine checks with weights based on importance (adjust as needed)
-#     data_analysis_score = 0.6 * (num_lines / (gray.shape[0] * gray.shape[1])) + 0.4 * (num_bright_pixels / (img_array.shape[0] * img_array.shape[1]))
-
-#     # Set a threshold for desired sensitivity (adjust as needed)
-#     return data_analysis_score > 0.5
-
-# -----------------#-----------------#
 
 # All APi Routes
 
@@ -146,13 +102,18 @@ def data_analysis_code():
         expected_output = get_response_gemini(formatted_expected_output)
 
         explanation = f"""
-            Explain this Code snippet:
+            Explain this Code snippet by list format:
             
             ```
             {res}
             ```
             Provide with simplest and easy words of explanation:
-        """
+            
+            1. 
+            2.
+            3.
+            ...
+"""
         formatted_explanation = explanation.format(res=res)
         explanation = get_response_gemini(formatted_explanation)
 
@@ -163,60 +124,6 @@ def data_analysis_code():
         })
     else:
         return jsonify({"error": "I am specifically designed for the Data Analysis topic. Please feel free to ask me any questions related to Pandas or Numpy in this input field."})
-
-
-# @app.route("/data-analysis", methods=["POST"])
-# def data_analysis_code():
-#     data = request.json
-#     text_input = data.get("text_input", "")
-
-#     # Basic check if the prompt is likely a code request
-#     if "pandas" in text_input.lower() or "numpy" in text_input.lower() or "data analysis" in text_input.lower() or "data manipulation" in text_input.lower() or "data cleaning" in text_input.lower() or "data" in text_input.lower():
-#         formatted_prompt = f"""
-#             Generate any data manipulation, data cleaning, and data analysis code snippet using Pandas, NumPy only  for the following text below as user prompts in the text_input field:
-
-#             ```
-#             {text_input}
-#             ```
-
-#             You will only provide any data manipulation, data cleaning, and data analysis code snippet using Pandas, NumPy based on the text_input provided. Do not give any wrong answer if it's not a pandas or numpy or data manipulation, data cleaning, and data analysis code.
-#         """
-#         res = get_response_gemini(formatted_prompt)
-#         res = res.strip().lstrip("```python").rstrip("```")
-
-#         if res:
-#             expected_output = f"""
-#             what would be the expected response of this Code snippet:
-            
-#             ```
-#             {res}
-#             ```
-#             Provide sample Response with no explanation
-#         """
-#             formatted_expected_output = expected_output.format(res=res)
-#             expected_output = get_response_gemini(formatted_expected_output)
-
-#             explanation = f"""
-#             Explain this Code snippet:
-            
-#             ```
-#             {res}
-#             ```
-#             Provide with simplest and easy words of explanation step by step with bullet points don't give paragraph format
-#         """
-#             formatted_explanation = explanation.format(res=res)
-#             explanation = get_response_gemini(formatted_explanation)
-            
-#             return jsonify({
-#                 "code_snippet": res,
-#                 "expected_output": expected_output,
-#                 "explanation": explanation
-#             })
-#         else:
-#             return jsonify({"error": "I am specifically designed for the Data Analysis topic. Please feel free to ask me any questions related to data manipulation, data cleaning, and data analysis using Pandas, NumPy only in this input field."})
-#     else:
-#         return jsonify({"message": "I am designed for Data Manipulation, Data Cleaning, and Data analysis using Pandas, NumPy in this tab. Please ask me a question related to those libraries."})
-
 
 
 @app.route('/data-insights', methods=["POST"])
@@ -235,7 +142,7 @@ Generate a Machine Learning code snippet or a Statistical Analysis for the follo
     res = get_response_gemini(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
-    if res and ("Machine Learning" in text_input.lower() or "Statistical Analysis" in text_input.lower() or "ML" in text_input.lower() or 'data analysis' in text_input or 'project' in text_input or 'data insights' in text_input or 'statistical analysis' in text_input or 'ml model' in text_input):
+    if res and ("machine learning" in text_input.lower() or "statistical analysis" in text_input.lower() or "ml" in text_input.lower() or 'data analysis' in text_input or 'project' in text_input or 'data insights' in text_input or 'statistical analysis' in text_input or 'ml model' in text_input):
         expected_output = f"""
         what would be the expected response of this Code snippet:
             
@@ -251,13 +158,18 @@ Generate a Machine Learning code snippet or a Statistical Analysis for the follo
         expected_output = get_response_gemini(formatted_expected_output)
 
         explanation = f"""
-        Explain this Code snippet:
+            Explain this Code snippet by list format:
             
             ```
             {res}
             ```
             Provide with simplest and easy words of explanation:
-        """
+            
+            1. 
+            2.
+            3.
+            ...
+"""
 
         formatted_explanation = explanation.format(res=res)
 
@@ -293,7 +205,7 @@ Generate a SQL query snippet for the following text below:
     res = get_response_gemini(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
-    if res and ("SQL" in text_input.lower() or "sql query" in text_input or 'data analysis' in text_input or 'sql project' in text_input or 'database project' in text_input or 'db' in text_input or 'SQL Database' in text_input.lower()):
+    if res and ("sql" in text_input.lower() or "sql query" in text_input or 'data analysis' in text_input or 'sql project' in text_input or 'database project' in text_input or 'db' in text_input or 'SQL Database' in text_input.lower()):
         expected_output = f"""
         what would be the expected response of the sql query snippet:
                 
@@ -309,13 +221,18 @@ Generate a SQL query snippet for the following text below:
         expected_output = get_response_gemini(formatted_expected_output)
 
         explanation = f"""
-        Explain this SQL Query:
+            Explain this Code snippet by list format:
             
             ```
             {res}
             ```
             Provide with simplest and easy words of explanation:
-        """
+            
+            1. 
+            2.
+            3.
+            ...
+"""
 
         formatted_explanation = explanation.format(res=res)
 
@@ -350,7 +267,7 @@ Generate a Data Visualization Code snippet for the following text below:
     res = get_response_gemini(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
-    if res and ("Matplotlib" in text_input.lower() or "matplotlib" in text_input.capitalize() or "Plotly" in text_input.lower() or "plotly" in text_input.capitalize() or "Seaborn" in text_input.lower() or "seaborn" in text_input.capitalize() or 'Data Analysis' in text_input.lower() or 'project' in text_input or 'visualization' in text_input or 'plot' in text_input or 'Data Visualization' in text_input.lower() or "Analysis" in text_input.lower()):
+    if res and ("matplotlib" in text_input.lower() or "matplotlib" in text_input.capitalize() or "plotly" in text_input.lower() or "plotly" in text_input.capitalize() or "seaborn" in text_input.lower() or "seaborn" in text_input.capitalize() or 'data analysis' in text_input.lower() or 'project' in text_input or 'visualization' in text_input or 'plot' in text_input or 'data visualization' in text_input.lower() or "analysis" in text_input.lower()):
 
         expected_output = f"""
         what would be the expected response of this Data Visualization Code snippet:
@@ -367,13 +284,18 @@ Generate a Data Visualization Code snippet for the following text below:
         expected_output = get_response_gemini(formatted_expected_output)
 
         explanation = f"""
-        Explain this Data Visualization Code snippet:
-                
-                ```
-                {res}
-                ```
-                Provide with simplest and easy words of explanation:
-        """
+            Explain this Code snippet by list format:
+            
+            ```
+            {res}
+            ```
+            Provide with simplest and easy words of explanation:
+            
+            1. 
+            2.
+            3.
+            ...
+"""
 
         formatted_explanation = explanation.format(res=res)
 
@@ -403,10 +325,13 @@ def analysis_report():
             
             Title of the image
 
-            Data Analysis Report in Bullet points 
-
-        """
-
+            Data Analysis Report do that with simplest and easy words:
+            
+            1. 
+            2.
+            3.
+            ...
+"""
         if uploaded_file:
             # Save the uploaded file to a temporary directory
             filename = secure_filename(uploaded_file.filename)
