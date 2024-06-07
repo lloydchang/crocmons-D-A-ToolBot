@@ -125,9 +125,9 @@ export default function Home() {
             height={16}
           />
         </span>
-                        <li className='sm:text-xl my-6 gap-6'>
+                        <p className='sm:text-xl my-6 gap-6'>
                             {result}
-                            </li>
+                            </p>
                     </div>
                 )}
             </div>
