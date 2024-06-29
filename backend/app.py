@@ -160,7 +160,11 @@ Generate a Machine Learning code snippet or a Statistical Analysis for the follo
     res = get_response_groq(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
-    if res and ("machine learning" in text_input.lower() or "statistical analysis" in text_input.lower() or "ml" in text_input.lower() or 'data analysis' in text_input or 'project' in text_input or 'data insights' in text_input or 'statistical analysis' in text_input or 'ml model' in text_input):
+    if res:
+
+        # and ("machine learning" in text_input.lower() or "statistical analysis" in text_input.lower() or "ml" in text_input.lower() or 'data analysis' in text_input or 'project' in text_input or 'data insights' in text_input or 'statistical analysis' in text_input or 'ml model' in text_input)
+
+        
         expected_output = f"""
         what would be the expected response of this Code snippet:
             
@@ -223,7 +227,10 @@ Generate a SQL query snippet for the following text below:
     res = get_response_groq(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
-    if res and ("sql" in text_input.lower() or "sql query" in text_input or 'data analysis' in text_input or 'sql project' in text_input or 'database project' in text_input or 'db' in text_input or 'SQL Database' in text_input.lower()):
+    if res:
+
+        # and ("sql" in text_input.lower() or "sql query" in text_input or 'data analysis' in text_input or 'sql project' in text_input or 'database project' in text_input or 'db' in text_input or 'SQL Database' in text_input.lower())
+
         expected_output = f"""
         what would be the expected response of the sql query snippet:
                 
@@ -285,7 +292,9 @@ Generate a Data Visualization Code snippet for the following text below:
     res = get_response_groq(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
-    if res and ("matplotlib" in text_input.lower() or "matplotlib" in text_input.capitalize() or "plotly" in text_input.lower() or "plotly" in text_input.capitalize() or "seaborn" in text_input.lower() or "seaborn" in text_input.capitalize() or 'data analysis' in text_input.lower() or 'project' in text_input or 'visualization' in text_input or 'plot' in text_input or 'data visualization' in text_input.lower() or "analysis" in text_input.lower()):
+    if res:
+        # and ("matplotlib" in text_input.lower() or "matplotlib" in text_input.capitalize() or "plotly" in text_input.lower() or "plotly" in text_input.capitalize() or "seaborn" in text_input.lower() or "seaborn" in text_input.capitalize() or 'data analysis' in text_input.lower() or 'project' in text_input or 'visualization' in text_input or 'plot' in text_input or 'data visualization' in text_input.lower() or "analysis" in text_input.lower())
+
 
         expected_output = f"""
         what would be the expected response of this Data Visualization Code snippet:
