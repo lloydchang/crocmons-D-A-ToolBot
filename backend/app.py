@@ -1,14 +1,14 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-import re
 import google.generativeai as genai
 import numpy as np
 import base64
-from vertexai.preview.generative_models import Part
 import vertexai
 import tempfile
-import io
+# from langchain_groq import ChatGroq
+# from langchain_core.prompts import ChatPromptTemplate
+from groq import Groq
 from werkzeug.utils import secure_filename
 from pathlib import Path
 from dotenv import load_dotenv
@@ -32,17 +32,35 @@ CORS(app, resources={
     r"/data-insights": {"origins": "https://data-analysis-toolbot.vercel.app"}
 })
 
- 
+# groq api key
+client = Groq(
+    api_key=os.environ.get("GROQ_API_KEY"),
+)
+
+# gemini api key
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-
+# gemini model
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 
 # only text response
-def get_response_gemini(input):
-    response = model.generate_content(input)
-    return response.text
+def get_response_groq(input):
+    # gemini response
+    # response = model.generate_content(input)
+    # return response.text
+
+    # groq response
+    response = client.chat.completions.create(
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": input},
+        ],
+        model="llama3-8b-8192"
+    )
+    # print(response.choices[0].message.content)
+    return response.choices[0].message.content
+    
 
 
 # Both vision and text response 
@@ -86,7 +104,7 @@ def data_analysis_code():
 
         You will only provide a Pandas or Numpy code snippet based on the text_input provided, Do not give any wrong answer if it's not a pandas or numpy code.
     """
-    res = get_response_gemini(formatted_prompt)
+    res = get_response_groq(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
     if res:
@@ -99,7 +117,7 @@ def data_analysis_code():
             Provide sample Response with no explanation
         """
         formatted_expected_output = expected_output.format(res=res)
-        expected_output = get_response_gemini(formatted_expected_output)
+        expected_output = get_response_groq(formatted_expected_output)
 
         explanation = f"""
             Explain this Code snippet by list format:
@@ -115,7 +133,7 @@ def data_analysis_code():
             ...
 """
         formatted_explanation = explanation.format(res=res)
-        explanation = get_response_gemini(formatted_explanation)
+        explanation = get_response_groq(formatted_explanation)
 
         return jsonify({
             "code_snippet": res,
@@ -139,7 +157,7 @@ Generate a Machine Learning code snippet or a Statistical Analysis for the follo
                 
                 I just want only the Machine Learning code snippet or a Statistical Analysis code snippet for any Data Analysis Project only.
             """
-    res = get_response_gemini(formatted_prompt)
+    res = get_response_groq(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
     if res and ("machine learning" in text_input.lower() or "statistical analysis" in text_input.lower() or "ml" in text_input.lower() or 'data analysis' in text_input or 'project' in text_input or 'data insights' in text_input or 'statistical analysis' in text_input or 'ml model' in text_input):
@@ -155,7 +173,7 @@ Generate a Machine Learning code snippet or a Statistical Analysis for the follo
 
         # updated expected output with the gemini response
 
-        expected_output = get_response_gemini(formatted_expected_output)
+        expected_output = get_response_groq(formatted_expected_output)
 
         explanation = f"""
             Explain this Code snippet by list format:
@@ -175,7 +193,7 @@ Generate a Machine Learning code snippet or a Statistical Analysis for the follo
 
         # updated explanation
 
-        explanation = get_response_gemini(formatted_explanation)
+        explanation = get_response_groq(formatted_explanation)
 
         return jsonify({
             "code_snippet": res,
@@ -202,7 +220,7 @@ Generate a SQL query snippet for the following text below:
                 
                 I just want only the sql query here for Data Analysis.
             """
-    res = get_response_gemini(formatted_prompt)
+    res = get_response_groq(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
     if res and ("sql" in text_input.lower() or "sql query" in text_input or 'data analysis' in text_input or 'sql project' in text_input or 'database project' in text_input or 'db' in text_input or 'SQL Database' in text_input.lower()):
@@ -218,7 +236,7 @@ Generate a SQL query snippet for the following text below:
 
         # updated expected output with the gemini response
 
-        expected_output = get_response_gemini(formatted_expected_output)
+        expected_output = get_response_groq(formatted_expected_output)
 
         explanation = f"""
             Explain this Code snippet by list format:
@@ -238,7 +256,7 @@ Generate a SQL query snippet for the following text below:
 
         # updated explanation
 
-        explanation = get_response_gemini(formatted_explanation)
+        explanation = get_response_groq(formatted_explanation)
 
         return jsonify({
             "code_snippet": res,
@@ -264,7 +282,7 @@ Generate a Data Visualization Code snippet for the following text below:
                 
                 I just want only the Data Visualization Code snippet using different libraries like Matplotlib or Plotly or Seaborn based on the text_input. 
             """
-    res = get_response_gemini(formatted_prompt)
+    res = get_response_groq(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
     if res and ("matplotlib" in text_input.lower() or "matplotlib" in text_input.capitalize() or "plotly" in text_input.lower() or "plotly" in text_input.capitalize() or "seaborn" in text_input.lower() or "seaborn" in text_input.capitalize() or 'data analysis' in text_input.lower() or 'project' in text_input or 'visualization' in text_input or 'plot' in text_input or 'data visualization' in text_input.lower() or "analysis" in text_input.lower()):
@@ -281,7 +299,7 @@ Generate a Data Visualization Code snippet for the following text below:
 
         # updated expected output with the gemini response
 
-        expected_output = get_response_gemini(formatted_expected_output)
+        expected_output = get_response_groq(formatted_expected_output)
 
         explanation = f"""
             Explain this Code snippet by list format:
@@ -301,7 +319,7 @@ Generate a Data Visualization Code snippet for the following text below:
 
         # updated explanation
 
-        explanation = get_response_gemini(formatted_explanation)
+        explanation = get_response_groq(formatted_explanation)
 
         return jsonify({
             "code_snippet": res,
@@ -361,5 +379,5 @@ def analysis_report():
 # --------#####-------#
 # only for development purpose
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
