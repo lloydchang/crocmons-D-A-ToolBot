@@ -26,7 +26,7 @@ Data Analysis ToolBot is a comprehensive data analysis tool built to streamline 
 - Frontend: Next.js 14, TypeScript, Tailwind CSS
 - Backend: Flask, Node.js
 - Database: MongoDB
-- AI Integration: Gemini AI
+- AI Integration: Groq, llama-3, Gemini 
 - User Authentication: Clerk
 
 ## Installation
