@@ -58,8 +58,7 @@ def get_response_groq(input):
         ],
         model="llama3-8b-8192",
         top_p=1,
-        stream=True,
-        stop=None,
+        
     )
     output = ""
     # print(response.choices[0].message.content)
