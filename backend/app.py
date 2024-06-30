@@ -56,7 +56,7 @@ def get_response_groq(input):
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": input},
         ],
-        model="gemma-7b-it",
+        model="llama3-8b-8192",
         top_p=1,
 
     )
