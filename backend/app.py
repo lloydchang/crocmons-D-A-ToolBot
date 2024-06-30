@@ -56,9 +56,8 @@ def get_response_groq(input):
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": input},
         ],
-        model="llama3-8b-8192",
+        model="gemma-7b-it",
         top_p=1,
-        stream=True,
 
     )
     print(response.choices[0].message.content)   
