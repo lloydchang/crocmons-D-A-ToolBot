@@ -58,14 +58,11 @@ def get_response_groq(input):
         ],
         model="llama3-8b-8192",
         top_p=1,
-        
+        stream=True,
+
     )
-    output = ""
-    # print(response.choices[0].message.content)
-    for chunk in response:
-        print(chunk.choices[0].delta.content or "", end="")
-        output += chunk.choices[0].delta.content or ""
-        return output
+    print(response.choices[0].message.content)   
+    return response.choices[0].message.content
     
 
 
