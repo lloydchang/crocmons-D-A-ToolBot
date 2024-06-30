@@ -56,7 +56,10 @@ def get_response_groq(input):
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": input},
         ],
-        model="llama3-8b-8192"
+        model="gemma-7b-it",
+        max_tokens=1024,
+        top_p=1,
+        stream=True,
     )
     # print(response.choices[0].message.content)
     return response.choices[0].message.content
@@ -164,7 +167,7 @@ Generate a Machine Learning code snippet or a Statistical Analysis for the follo
 
         # and ("machine learning" in text_input.lower() or "statistical analysis" in text_input.lower() or "ml" in text_input.lower() or 'data analysis' in text_input or 'project' in text_input or 'data insights' in text_input or 'statistical analysis' in text_input or 'ml model' in text_input)
 
-        
+
         expected_output = f"""
         what would be the expected response of this Code snippet:
             
