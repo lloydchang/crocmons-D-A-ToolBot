@@ -56,16 +56,17 @@ def get_response_groq(input):
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": input},
         ],
-        model="gemma-7b-it",
-        max_tokens=1024,
+        model="llama3-8b-8192",
         top_p=1,
         stream=True,
         stop=None,
     )
+    output = ""
     # print(response.choices[0].message.content)
     for chunk in response:
         print(chunk.choices[0].delta.content or "", end="")
-        return chunk.choices[0].delta.content or ""
+        output += chunk.choices[0].delta.content or ""
+        return output
     
 
 
