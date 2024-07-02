@@ -18,7 +18,6 @@ Data Analysis ToolBot is a comprehensive data analysis tool built to streamline 
 - Five distinct tabs tailored to specific data analysis tasks: Data Analysis, Data Visualization, SQL Database, Analysis Report, and Data Insights.
 - Seamless integration with Gemini AI for advanced data analysis capabilities.
 - User authentication and management system provided by Clerk.
-- CRUD functionality for sharing prompts and collaborating with others.
 - Efficient code generation with expected demo output and detailed explanations.
 - Responsive design for a seamless user experience across devices.
 
