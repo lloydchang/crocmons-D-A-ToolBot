@@ -64,7 +64,7 @@ def get_response_groq(input):
 
     )
     print(response.choices[0].message.content)   
-    return markdown_text(response.choices[0].message.content)
+    return response.choices[0].message.content
     
 # Markdown text function:
 def markdown_text(text):
@@ -129,13 +129,14 @@ def data_analysis_code():
         expected_output = get_response_groq(formatted_expected_output)
 
         explanation = f"""
-            Explain this Code snippet by list format:
+            \n\n-----------\n Explain this Code snippet by list format:
             
             ```
             {res}
             ```
-            Provide with simplest and easy words of explanation:
+            \n\n-----------\nProvide with simplest and easy words of explanation:
             
+            \n\n-----------\n
             1. 
             2.
             3.
@@ -359,9 +360,9 @@ def analysis_report():
         prompt = """
             You're an expert data analyst. You're going to make a data analysis Report for the following image and explain every line from that given image. By following the below format -
             
-            Title of the image
+            \n\n-----------\n Title of the image
 
-            Data Analysis Report do that with simplest and easy words:
+            \n\n-----------\nData Analysis Report do that with simplest and easy words:
             
             1. 
             2.
