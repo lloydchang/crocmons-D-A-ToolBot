@@ -64,7 +64,7 @@ def get_response_groq(input):
 
     )
     print(response.choices[0].message.content)   
-    return markdown_text(response.choices[0].message.content)
+    return response.choices[0].message.content
     
 # Markdown text function:
 def markdown_text(text):
@@ -76,7 +76,7 @@ def markdown_text(text):
 def generate_vision_response(input, img, prompt):
     response = model.generate_content([input, img[0], prompt],               
          )
-    return markdown_text(response.text)
+    return response.text
 
 
 
