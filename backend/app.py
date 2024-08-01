@@ -358,16 +358,73 @@ def analysis_report():
         text_input = request.form.get("text_input", "")
         uploaded_file = request.files.get('uploaded_file')
         prompt = """
-            You're an expert data analyst. You're going to make a data analysis Report for the following image and explain every line from that given image. By following the below format -
-            
-            \n\n-----------\n Title of the image
+            You're an expert data analyst. You're going to make a data analysis report for the following image and explain every line from that given image. Please follow the format below:
 
-            \n\n-----------\nData Analysis Report do that with simplest and easy words:
-            
-            1. 
-            2.
-            3.
-            ...
+            -----------
+
+            **Title of the image**
+
+            -----------
+
+            **Data Analysis Report**
+
+            1. **Category**
+                - **Customer:** Explanation here.
+                - **Spill:** Explanation here.
+                - **Injury:** Explanation here.
+                - **Equipment:** Explanation here.
+                - **Transport:** Explanation here.
+                - **Security:** Explanation here.
+
+            2. **Cause**
+                - **Personnel:** Explanation here.
+                - **Equipment:** Explanation here.
+                - **Management:** Explanation here.
+                - **External:** Explanation here.
+                - **Training:** Explanation here.
+                - **Design:** Explanation here.
+
+            3. **Month**
+                - Explanation here.
+                - Explanation here.
+                - Explanation here.
+
+            4. **Site**
+                - **Hudson:** Explanation here.
+                - **Concord:** Explanation here.
+                - **Weston:** Explanation here.
+                - **Bolton, Shirley, Lincoln, Maynard, and Acton:** Explanation here.
+                - Explanation here.
+
+            5. **Trend**
+                - Explanation here.
+                - Explanation here.
+
+            6. **Severity**
+                - **Critical:** Explanation here.
+                - **Major:** Explanation here.
+                - **Medium:** Explanation here.
+                - **Near Miss:** Explanation here.
+                - Explanation here.
+
+            **Overall Observations:**
+
+            - Explanation here.
+            - Explanation here.
+            - Explanation here.
+            - Explanation here.
+
+            **Recommendations:**
+
+            - Explanation here.
+            - Explanation here.
+            - Explanation here.
+            - Explanation here.
+            - Explanation here.
+            - Explanation here.
+            - Explanation here.
+            - Explanation here.
+
 """
         if uploaded_file:
             # Save the uploaded file to a temporary directory
