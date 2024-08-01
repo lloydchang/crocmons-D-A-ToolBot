@@ -1,10 +1,12 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import loader from "@/public/assets/icons/loader.svg"
 import Image from 'next/image';
 import { Input } from '@/components/ui/input';
 import { SingleImageDropzone } from '@/components/shared/UploadFiles';
 import { useEdgeStore } from '@/lib/edgestore';
+import '@toast-ui/editor/dist/toastui-editor.css'
+import {Editor} from '@toast-ui/react-editor'
 
 export default function Home() {
     const [query, setQuery] = useState('');
@@ -73,6 +75,13 @@ export default function Home() {
         }
     }
 
+    const editorRef:any = useRef()
+    
+    useEffect(()=>{
+     const editorInstance = editorRef.current.getInstance();
+     editorInstance.setMarkdown(result)   
+    },[result])
+
 
     return (
         <div className='mx-auto bg-feature-bg bg-center bg-no-repeat'>
@@ -113,22 +122,27 @@ export default function Home() {
                         {error}
                     </p>
                 ) : result && (
-                    <div className='glassmorphism mb-4 sm:px-4'>
-                        <h3 className='font-semibold text-2xl text-blue-600'>Data Analysis Report:</h3>
-                        {/* Display result */}
-                        <span className='copy_btn' onClick={handleCopy}>
-          <Image
+                    <div className='bg-white shadow-lg border rounded-lg'>
+                    <div className='flex justify-between items-center p-5'>
+                        <h2 className='font-medium text-lg'>Your Result</h2>
+                        <span className='copy_btn' onClick={handleCopy}></span>
+                        <Image
             src={copied === result ? '/assets/icons/tick.svg' : '/assets/icons/copy.svg'}
             alt='copy'
             className='dark:w-13 dark:h-13 dark:font-semibold shadow-lg'
             width={16}
             height={16}
           />
-        </span>
-                        <p className='sm:text-xl my-6 gap-6'>
-                            {result}
-                            </p>
                     </div>
+                    <Editor 
+                     ref={editorRef}
+                     initialValue = 'Edit your content here'
+                     height = '600px'
+                     initialEditType='wysiwyg'
+                     useCommandShortcut={true}
+                     onChange={()=>console.log(editorRef.current.getInstance().getMarkdown())}
+                    />
+                </div>
                 )}
             </div>
         </div>

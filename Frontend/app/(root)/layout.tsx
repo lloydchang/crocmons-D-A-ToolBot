@@ -18,7 +18,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </EdgeStoreProvider>
           </div>
       </div>
-
+     
 
     </main>
   )

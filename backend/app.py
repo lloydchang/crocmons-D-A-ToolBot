@@ -368,6 +368,7 @@ def analysis_report():
 
             **Data Analysis Report**
 
+            \n\n-----------\n 
             1. **Category**
                 - **Customer:** Explanation here.
                 - **Spill:** Explanation here.
@@ -376,6 +377,7 @@ def analysis_report():
                 - **Transport:** Explanation here.
                 - **Security:** Explanation here.
 
+            \n\n-----------\n 
             2. **Cause**
                 - **Personnel:** Explanation here.
                 - **Equipment:** Explanation here.
