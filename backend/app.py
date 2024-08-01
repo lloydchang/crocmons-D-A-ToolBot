@@ -59,12 +59,12 @@ def get_response_groq(input):
             {"role": "user", "content": input},
         ],
         temperature = 0.1,
-        maxTokens = 1024,
+        max_tokens=1024,
         model = 'llama-3.1-70b-versatile'
 
     )
     print(response.choices[0].message.content)   
-    return response.choices[0].message.content
+    return markdown_text(response.choices[0].message.content)
     
 # Markdown text function:
 def markdown_text(text):
