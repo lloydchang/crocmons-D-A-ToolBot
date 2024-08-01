@@ -165,14 +165,12 @@ Generate a Machine Learning code snippet or a Statistical Analysis for the follo
                 {text_input}
                 ```
                 
-                I just want only the Machine Learning code snippet or a Statistical Analysis code snippet for any Data Analysis Project only.
+                I just want only the Machine Learning code snippet or a Statistical Analysis code snippet or any ml model code snippet for any Data Analysis Project only.
             """
     res = get_response_groq(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
     if res:
-
-        # and ("machine learning" in text_input.lower() or "statistical analysis" in text_input.lower() or "ml" in text_input.lower() or 'data analysis' in text_input or 'project' in text_input or 'data insights' in text_input or 'statistical analysis' in text_input or 'ml model' in text_input)
 
 
         expected_output = f"""
@@ -368,7 +366,7 @@ def analysis_report():
 
             **Data Analysis Report**
 
-            \n\n-----------\n 
+            \n\n
             1. **Category**
                 - **Customer:** Explanation here.
                 - **Spill:** Explanation here.
@@ -377,7 +375,7 @@ def analysis_report():
                 - **Transport:** Explanation here.
                 - **Security:** Explanation here.
 
-            \n\n-----------\n 
+            \n\n
             2. **Cause**
                 - **Personnel:** Explanation here.
                 - **Equipment:** Explanation here.
