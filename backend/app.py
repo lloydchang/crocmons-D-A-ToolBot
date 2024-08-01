@@ -6,6 +6,8 @@ import numpy as np
 import base64
 import vertexai
 import tempfile
+import textwrap
+from IPython.display import Markdown
 # from langchain_groq import ChatGroq
 # from langchain_core.prompts import ChatPromptTemplate
 from groq import Groq
@@ -56,20 +58,25 @@ def get_response_groq(input):
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": input},
         ],
-        model="llama3-8b-8192",
-        top_p=1,
+        temperature = 0.1,
+        maxTokens = 1024,
+        model = 'llama-3.1-70b-versatile'
 
     )
     print(response.choices[0].message.content)   
-    return response.choices[0].message.content
+    return markdown_text(response.choices[0].message.content)
     
+# Markdown text function:
+def markdown_text(text):
+    text = text.replace('*', '  *')
+    return Markdown(textwrap.indent(text, '> ', predicate=lambda _:True))
 
 
 # Both vision and text response 
 def generate_vision_response(input, img, prompt):
     response = model.generate_content([input, img[0], prompt],               
          )
-    return response.text
+    return markdown_text(response.text)
 
 
 
