@@ -56,7 +56,7 @@ export default function Home() {
       });
 
       const data = await res.json();
-      console.log(data)
+      // console.log(data)
       if (data.code_snippet) {
         setMessages((prev) => [
           ...prev,
@@ -85,30 +85,23 @@ export default function Home() {
       <h4 className='py-3 text-xl font-medium'>Here you can find your complete solution by using different Data Analysis Tabs for your project</h4>
       <p className='py-2 text-xl font-medium'>In this data analysis tab, you can generate any Pandas or Numpy Code snippet based on your prompts for your Data Analysis projects</p>
 
-      <div className='sm:chat_container px-2 my-2'>
+      <div className='chat_container px-2 my-2'>
         <div className='sm:chat_box' ref={chatParent}>
           {messages.map((message, index) => (
-            <div key={index} className={`sm:my-1 sm:px-2 sm:gap-1 flex flex-col`} ref={index === messages.length - 1 ? lastMessageRef : null}>
+            <div key={index} className={`sm:my-1 sm:px-2 sm:gap-1 flex flex-col my-8`} ref={index === messages.length - 1 ? lastMessageRef : null}>
               <div className='flex gap-2 py-1'>
-                {message.role === 'user' ? (
-                  <div className='self-end'>
-                    <SignedIn>
-                      <div className='self-end items-end mx-auto'>
-                        <UserButton afterSignOutUrl='/' showName />
-                      </div>
-                    </SignedIn>
-                  </div>
-                ) : (
-                  <>
-                    <Image 
+               {message.role === 'bot' && (
+                <>
+                <Image 
                       src={botAvatar}
                       alt='avatar'
                       width={34}
                       height={34}
                     />
+              
                     <span className='flex font-bold text-center items-center'>Assistant</span>
-                  </>
-                )}
+                    </>
+                  )}
               </div>
               
               {message.role === 'bot' && message.codeSnippet && (
@@ -146,10 +139,16 @@ export default function Home() {
                     </span>
                   )}
                 </div>
+                
               )}
               {message.role === 'user' && (
-                <div className='bg-blue-500 text-white font-medium w-fit px-4 rounded-full py-2.5 self-end'>
-                  {message.content}
+                <div className='self-end flex gap-3 shadow-sm'>
+                  <p className='bg-blue-500 text-white font-medium text-md w-full px-5 rounded-full py-2 md:py-4 break-words break-all transition-all justify-center md:mx-5 flex-wrap text-wrap flex-shrink'>{message.content}</p>
+                  <SignedIn>
+                      <div className='items-end mx-auto'>
+                        <UserButton afterSignOutUrl='/' />
+                      </div>
+                    </SignedIn>
                 </div>
               )}
               {message.role === 'bot' && !message.codeSnippet && (
