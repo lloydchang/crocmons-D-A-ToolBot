@@ -141,9 +141,10 @@ export default function Home() {
                 </div>
                 
               )}
+
               {message.role === 'user' && (
                 <div className='self-end flex gap-3 shadow-sm'>
-                  <p className='bg-blue-500 text-white font-medium text-md w-full px-5 rounded-full py-2 md:py-4 break-words break-all transition-all justify-center md:mx-5 flex-wrap text-wrap flex-shrink'>{message.content}</p>
+                  <p className='bg-blue-500 text-white font-medium text-md w-full px-5 rounded-2xl py-2 md:py-4 break-words break-all transition-all justify-center md:mx-5 flex-wrap text-wrap flex-shrink'>{message.content}</p>
                   <SignedIn>
                       <div className='items-end mx-auto'>
                         <UserButton afterSignOutUrl='/' />
