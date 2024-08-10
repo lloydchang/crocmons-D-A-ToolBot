@@ -1,12 +1,10 @@
 "use client"
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import loader from "@/public/assets/icons/loader.svg"
 import Image from 'next/image';
 import { Input } from '@/components/ui/input';
 import { SingleImageDropzone } from '@/components/shared/UploadFiles';
 import { useEdgeStore } from '@/lib/edgestore';
-import '@toast-ui/editor/dist/toastui-editor.css'
-import {Editor} from '@toast-ui/react-editor'
 
 export default function Home() {
     const [query, setQuery] = useState('');
@@ -68,28 +66,13 @@ export default function Home() {
         }
     };
 
-    const handleKeyDown = (e : any)=>{
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            handleSubmit(e);
-        }
-    }
-
-    const editorRef:any = useRef()
-    
-    useEffect(()=>{
-     const editorInstance = editorRef.current.getInstance();
-     editorInstance.setMarkdown(result)   
-    },[result])
-
-
     return (
         <div className='mx-auto bg-feature-bg bg-center bg-no-repeat'>
         <h1 className='font-bold text-center text-5xl my-6 text-black mx-auto'>Build your Data Visualization Report</h1>
             <h4 className='py-3 text-center text-xl font-medium'>Here you can build your complete Data Analysis Report for your project</h4>
             <p className='py-2 text-center text-xl font-medium'>Upload your Data Visualization Graph Image here</p>
             {/* Form and input fields */}
-            <form onSubmit={handleSubmit} className='flex flex-col justify-center gap-5 mx-auto my-5' onKeyDown={handleKeyDown}>
+            <form onSubmit={handleSubmit} className='flex flex-col justify-center gap-5 mx-auto my-5'>
                 {/* Input for text query */}
                 <Input
                     value={query}
@@ -122,27 +105,20 @@ export default function Home() {
                         {error}
                     </p>
                 ) : result && (
-                    <div className='bg-white shadow-lg border rounded-lg'>
-                    <div className='flex justify-between items-center p-5'>
-                        <h2 className='font-medium text-lg'>Your Result</h2>
-                        <span className='copy_btn' onClick={handleCopy}></span>
-                        <Image
+                    <div className='mx-auto px-2 py-2 flex flex-col justify-center gap-5 glassmorphism'>
+                        <h3 className='font-semibold text-2xl text-blue-600'>Data Analysis Report:</h3>
+                        {/* Display result */}
+                        <span className='copy_btn' onClick={handleCopy}>
+          <Image
             src={copied === result ? '/assets/icons/tick.svg' : '/assets/icons/copy.svg'}
             alt='copy'
             className='dark:w-13 dark:h-13 dark:font-semibold shadow-lg'
             width={16}
             height={16}
           />
+        </span>
+                        <p className='sm:text-xl'>{result}</p>
                     </div>
-                    <Editor 
-                     ref={editorRef}
-                     initialValue = 'Edit your content here'
-                     height = '600px'
-                     initialEditType='wysiwyg'
-                     useCommandShortcut={true}
-                     onChange={()=>console.log(editorRef.current.getInstance().getMarkdown())}
-                    />
-                </div>
                 )}
             </div>
         </div>
