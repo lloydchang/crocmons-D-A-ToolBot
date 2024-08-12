@@ -8,9 +8,6 @@ import vertexai
 import tempfile
 import textwrap
 from IPython.display import Markdown
-# from langchain_groq import ChatGroq
-# from langchain_core.prompts import ChatPromptTemplate
-from groq import Groq
 from werkzeug.utils import secure_filename
 from pathlib import Path
 from dotenv import load_dotenv
@@ -18,12 +15,6 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# Environment Variable for base_url
-# url = os.getenv("NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL")
-# if url:
-#     base_url = url
-# else:
-#     base_url = "http://localhost:3000"
 
 # Enable CORS for all routes
 CORS(app, resources={
@@ -34,10 +25,6 @@ CORS(app, resources={
     r"/data-insights": {"origins": "https://data-analysis-toolbot.vercel.app"}
 })
 
-# groq api key
-client = Groq(
-    api_key=os.environ.get("GROQ_API_KEY"),
-)
 
 # gemini api key
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
@@ -47,24 +34,11 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 
 
 # only text response
-def get_response_groq(input):
+def get_response_gemini(input):
     # gemini response
-    # response = model.generate_content(input)
-    # return response.text
+    response = model.generate_content(input)
+    return response.text
 
-    # groq response
-    response = client.chat.completions.create(
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": input},
-        ],
-        temperature = 0.1,
-        max_tokens=1024,
-        model = 'llama-3.1-70b-versatile'
-
-    )
-    print(response.choices[0].message.content)   
-    return response.choices[0].message.content
     
 # Markdown text function:
 def markdown_text(text):
@@ -113,7 +87,7 @@ def data_analysis_code():
 
         You will only provide a Pandas or Numpy code snippet based on the text_input provided, Do not give any wrong answer if it's not a pandas or numpy code.
     """
-    res = get_response_groq(formatted_prompt)
+    res = get_response_gemini(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
     if res:
@@ -126,7 +100,7 @@ def data_analysis_code():
             Provide sample Response with no explanation
         """
         formatted_expected_output = expected_output.format(res=res)
-        expected_output = get_response_groq(formatted_expected_output)
+        expected_output = get_response_gemini(formatted_expected_output)
 
         explanation = f"""
             \n\n-----------\n Explain this Code snippet by list format:
@@ -143,7 +117,7 @@ def data_analysis_code():
             ...
 """
         formatted_explanation = explanation.format(res=res)
-        explanation = get_response_groq(formatted_explanation)
+        explanation = get_response_gemini(formatted_explanation)
 
         return jsonify({
             "code_snippet": res,
@@ -167,7 +141,7 @@ Generate a Machine Learning code snippet or a Statistical Analysis for the follo
                 
                 I just want only the Machine Learning code snippet or a Statistical Analysis code snippet or any ml model code snippet for any Data Analysis Project only.
             """
-    res = get_response_groq(formatted_prompt)
+    res = get_response_gemini(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
     if res:
@@ -185,7 +159,7 @@ Generate a Machine Learning code snippet or a Statistical Analysis for the follo
 
         # updated expected output with the gemini response
 
-        expected_output = get_response_groq(formatted_expected_output)
+        expected_output = get_response_gemini(formatted_expected_output)
 
         explanation = f"""
             Explain this Code snippet by list format:
@@ -205,7 +179,7 @@ Generate a Machine Learning code snippet or a Statistical Analysis for the follo
 
         # updated explanation
 
-        explanation = get_response_groq(formatted_explanation)
+        explanation = get_response_gemini(formatted_explanation)
 
         return jsonify({
             "code_snippet": res,
@@ -232,7 +206,7 @@ Generate a SQL query snippet for the following text below:
                 
                 I just want only the sql query here for Data Analysis.
             """
-    res = get_response_groq(formatted_prompt)
+    res = get_response_gemini(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
     if res:
@@ -251,7 +225,7 @@ Generate a SQL query snippet for the following text below:
 
         # updated expected output with the gemini response
 
-        expected_output = get_response_groq(formatted_expected_output)
+        expected_output = get_response_gemini(formatted_expected_output)
 
         explanation = f"""
             Explain this Code snippet by list format:
@@ -271,7 +245,7 @@ Generate a SQL query snippet for the following text below:
 
         # updated explanation
 
-        explanation = get_response_groq(formatted_explanation)
+        explanation = get_response_gemini(formatted_explanation)
 
         return jsonify({
             "code_snippet": res,
@@ -297,7 +271,7 @@ Generate a Data Visualization Code snippet for the following text below:
                 
                 I just want only the Data Visualization Code snippet using different libraries like Matplotlib or Plotly or Seaborn based on the text_input. 
             """
-    res = get_response_groq(formatted_prompt)
+    res = get_response_gemini(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
     if res:
@@ -316,7 +290,7 @@ Generate a Data Visualization Code snippet for the following text below:
 
         # updated expected output with the gemini response
 
-        expected_output = get_response_groq(formatted_expected_output)
+        expected_output = get_response_gemini(formatted_expected_output)
 
         explanation = f"""
             Explain this Code snippet by list format:
@@ -336,7 +310,7 @@ Generate a Data Visualization Code snippet for the following text below:
 
         # updated explanation
 
-        explanation = get_response_groq(formatted_explanation)
+        explanation = get_response_gemini(formatted_explanation)
 
         return jsonify({
             "code_snippet": res,
