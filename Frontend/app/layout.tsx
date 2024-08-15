@@ -3,6 +3,7 @@ import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const IBMPlex = IBM_Plex_Sans(
   { 
@@ -32,10 +33,13 @@ export default function RootLayout({
       <body className={cn("font-IBMPlex antialiased", IBMPlex.variable, "hide-scrollbar")}>
       <div className="main">
           <div className="gradient" />
-        </div>
+      </div>
         {children}
         </body>
+        <GoogleAnalytics gaId="G-YCE58EK04E" />
     </html>
     </ClerkProvider>
   );
 }
+
+
