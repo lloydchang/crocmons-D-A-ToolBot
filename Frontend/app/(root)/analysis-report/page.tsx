@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Input } from '@/components/ui/input';
 import { SingleImageDropzone } from '@/components/shared/UploadFiles';
 import { useEdgeStore } from '@/lib/edgestore';
+import ReactMarkdown from "react-markdown";
 
 export default function Home() {
     const [query, setQuery] = useState('');
@@ -117,7 +118,7 @@ export default function Home() {
             height={16}
           />
         </span>
-                        <p className='sm:text-xl'>{result}</p>
+                        <ReactMarkdown className='sm:text-xl'>{result}</ReactMarkdown>
                     </div>
                 )}
             </div>
