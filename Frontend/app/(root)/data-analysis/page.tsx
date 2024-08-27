@@ -6,6 +6,7 @@ import loader from "@/public/assets/icons/loader.svg";
 import { SignedIn, UserButton } from '@clerk/nextjs';
 import botAvatar from "@/public/assets/images/bot.svg"
 import send from "@/public/assets/icons/send.svg"
+import ReactMarkdown from "react-markdown";
 
 export default function Home() {
   const [query, setQuery] = useState('');
@@ -126,7 +127,7 @@ export default function Home() {
                   </div>
                   <div className='md:text-section my-6 gap-6'>
                     <strong>Explanation:</strong>
-                    <p>{message.explanation}</p>
+                    <ReactMarkdown>{message.explanation}</ReactMarkdown>
                   </div>
                   {message.role === 'bot' && (
                     <span className='copy_btn' onClick={() => handleCopy(message.explanation)}>
