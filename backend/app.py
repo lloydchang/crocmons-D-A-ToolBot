@@ -162,12 +162,14 @@ Generate a Machine Learning code snippet or a Statistical Analysis for the follo
         expected_output = get_response_gemini(formatted_expected_output)
 
         explanation = f"""
-            Explain this Code snippet by list format:
+            \n\n-----------\n Explain this Code snippet by list format:
             
             ```
             {res}
             ```
-            Provide with simplest and easy words of explanation:
+            \n\n-----------\nProvide with simplest and easy words of explanation:
+            
+            \n\n-----------\n
             
             1. 
             2.
@@ -228,13 +230,14 @@ Generate a SQL query snippet for the following text below:
         expected_output = get_response_gemini(formatted_expected_output)
 
         explanation = f"""
-            Explain this Code snippet by list format:
+            \n\n-----------\n Explain this Code snippet by list format:
             
             ```
             {res}
             ```
-            Provide with simplest and easy words of explanation:
+            \n\n-----------\nProvide with simplest and easy words of explanation:
             
+            \n\n-----------\n
             1. 
             2.
             3.
@@ -293,13 +296,14 @@ Generate a Data Visualization Code snippet for the following text below:
         expected_output = get_response_gemini(formatted_expected_output)
 
         explanation = f"""
-            Explain this Code snippet by list format:
+            \n\n-----------\n Explain this Code snippet by list format:
             
             ```
             {res}
             ```
-            Provide with simplest and easy words of explanation:
+            \n\n-----------\nProvide with simplest and easy words of explanation:
             
+            \n\n-----------\n
             1. 
             2.
             3.
@@ -342,32 +346,16 @@ def analysis_report():
 
             \n\n
             1. **Category**
-                - **Customer:** Explanation here.
-                - **Spill:** Explanation here.
-                - **Injury:** Explanation here.
-                - **Equipment:** Explanation here.
-                - **Transport:** Explanation here.
-                - **Security:** Explanation here.
+                - Explanation here.
 
             \n\n
             2. **Cause**
-                - **Personnel:** Explanation here.
-                - **Equipment:** Explanation here.
-                - **Management:** Explanation here.
-                - **External:** Explanation here.
-                - **Training:** Explanation here.
-                - **Design:** Explanation here.
+                - Explanation here.
 
             3. **Month**
                 - Explanation here.
-                - Explanation here.
-                - Explanation here.
 
             4. **Site**
-                - **Hudson:** Explanation here.
-                - **Concord:** Explanation here.
-                - **Weston:** Explanation here.
-                - **Bolton, Shirley, Lincoln, Maynard, and Acton:** Explanation here.
                 - Explanation here.
 
             5. **Trend**
@@ -375,17 +363,11 @@ def analysis_report():
                 - Explanation here.
 
             6. **Severity**
-                - **Critical:** Explanation here.
-                - **Major:** Explanation here.
-                - **Medium:** Explanation here.
-                - **Near Miss:** Explanation here.
+                
                 - Explanation here.
 
             **Overall Observations:**
 
-            - Explanation here.
-            - Explanation here.
-            - Explanation here.
             - Explanation here.
 
             **Recommendations:**
@@ -393,11 +375,7 @@ def analysis_report():
             - Explanation here.
             - Explanation here.
             - Explanation here.
-            - Explanation here.
-            - Explanation here.
-            - Explanation here.
-            - Explanation here.
-            - Explanation here.
+            
 
 """
         if uploaded_file:
