@@ -10,6 +10,7 @@ import textwrap
 from IPython.display import Markdown
 from werkzeug.utils import secure_filename
 from pathlib import Path
+from groq import Groq
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -25,6 +26,8 @@ CORS(app, resources={
     r"/data-insights": {"origins": "https://data-analysis-toolbot.vercel.app"}
 })
 
+os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
+client = Groq()
 
 # gemini api key
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
@@ -33,11 +36,35 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 
-# only text response
+# only gemini text response
 def get_response_gemini(input):
     # gemini response
     response = model.generate_content(input)
     return response.text
+
+
+# only data insights text response using groq
+def get_groq_response(input):
+    completion = client.chat.completions.create(
+        model="llama-3.1-70b-versatile",
+        messages=[
+            {
+                "role": "user",
+                "content": input
+            }
+        ],
+        temperature=1,
+        max_tokens=1024,
+        top_p=1,
+        stream=True,
+        stop=None,
+    )
+
+    response = ""
+    for chunk in completion:
+        response += chunk.choices[0].delta.content or ""
+    
+    return response
 
     
 # Markdown text function:
@@ -141,7 +168,7 @@ Generate a Machine Learning code snippet or ML code snippet or a Statistical Ana
                 
                 I just want only the Machine Learning code snippet or a Statistical Analysis code snippet or any ml model code snippet for the Project only.
             """
-    res = get_response_gemini(formatted_prompt)
+    res = get_groq_response(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
 
     if res:
@@ -159,7 +186,7 @@ Generate a Machine Learning code snippet or ML code snippet or a Statistical Ana
 
         # updated expected output with the gemini response
 
-        expected_output = get_response_gemini(formatted_expected_output)
+        expected_output = get_groq_response(formatted_expected_output)
 
         explanation = f"""
             \n\n-----------\n Explain this Code snippet by list format:
@@ -181,7 +208,7 @@ Generate a Machine Learning code snippet or ML code snippet or a Statistical Ana
 
         # updated explanation
 
-        explanation = get_response_gemini(formatted_explanation)
+        explanation = get_groq_response(formatted_explanation)
 
         return jsonify({
             "code_snippet": res,
