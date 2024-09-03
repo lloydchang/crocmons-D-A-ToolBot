@@ -139,7 +139,7 @@ Generate a Machine Learning code snippet or ML code snippet or a Statistical Ana
                 {text_input}
                 ```
                 
-                I just want only the Machine Learning code snippet or a Statistical Analysis code snippet or any ml model code snippet for any Data Analysis Project only. If it's not related to data analysis ml model then politely say I don't know this!  kindly ask me any data insights question here..
+                I just want only the Machine Learning code snippet or a Statistical Analysis code snippet or any ml model code snippet for the Project only.
             """
     res = get_response_gemini(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
