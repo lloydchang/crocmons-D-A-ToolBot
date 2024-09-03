@@ -91,25 +91,18 @@ export default function Home() {
           {messages.map((message, index) => (
             <div key={index} className={`sm:my-1 sm:px-2 sm:gap-1 flex flex-col`} ref={index === messages.length - 1 ? lastMessageRef : null}>
               <div className='flex gap-2 py-1'>
-                {message.role === 'user' ? (
-                  <div className='self-end'>
-                    <SignedIn>
-                      <div className='self-end items-end mx-auto'>
-                        <UserButton afterSignOutUrl='/' showName />
-                      </div>
-                    </SignedIn>
-                  </div>
-                ) : (
-                  <>
-                    <Image 
+              {message.role === 'bot' && (
+                <>
+                <Image 
                       src={botAvatar}
                       alt='avatar'
                       width={34}
                       height={34}
                     />
+              
                     <span className='flex font-bold text-center items-center'>Assistant</span>
-                  </>
-                )}
+                    </>
+                  )}
               </div>
               
               {message.role === 'bot' && message.codeSnippet && (
@@ -149,8 +142,13 @@ export default function Home() {
                 </div>
               )}
               {message.role === 'user' && (
-                <div className='bg-blue-500 text-white font-medium w-fit px-4 rounded-full py-2.5 self-end'>
-                  {message.content}
+                <div className='self-end flex gap-3 shadow-sm'>
+                  <p className='bg-blue-500 text-white font-medium text-md w-full px-5 rounded-2xl py-2 md:py-4 break-words break-all transition-all justify-center md:mx-5 flex-wrap text-wrap flex-shrink'>{message.content}</p>
+                  <SignedIn>
+                      <div className='items-end mx-auto'>
+                        <UserButton afterSignOutUrl='/' />
+                      </div>
+                    </SignedIn>
                 </div>
               )}
               {message.role === 'bot' && !message.codeSnippet && (
