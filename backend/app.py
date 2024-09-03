@@ -133,13 +133,13 @@ def data_insights():
     data = request.json
     text_input = data.get("text_input", "")
     formatted_prompt = f"""
-Generate a Machine Learning code snippet or a Statistical Analysis for the following text below:
+Generate a Machine Learning code snippet or ML code snippet or a Statistical Analysis for the following text below:
 
                 ```
                 {text_input}
                 ```
                 
-                I just want only the Machine Learning code snippet or a Statistical Analysis code snippet or any ml model code snippet for any Data Analysis Project only.
+                I just want only the Machine Learning code snippet or a Statistical Analysis code snippet or any ml model code snippet for any Data Analysis Project only. If it's not related to data analysis ml model then politely say I don't know this!  kindly ask me any data insights question here..
             """
     res = get_response_gemini(formatted_prompt)
     res = res.strip().lstrip("```python").rstrip("```")
