@@ -160,7 +160,7 @@ def data_insights():
     data = request.json
     text_input = data.get("text_input", "")
     formatted_prompt = f"""
-Generate a Machine Learning code snippet or ML code snippet or a Statistical Analysis for the following text below:
+Generate a Machine Learning code snippet or ML code snippet or a Statistical Analysis for the following text below as user prompts in the text_input field:
 
                 ```
                 {text_input}
